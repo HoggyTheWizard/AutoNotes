@@ -3,14 +3,21 @@ import wikipedia
 
 with open("terms.txt") as file:
     term_list = []
-    for word in file.readlines():
+    for word in file:
         word.replace("\n", "")
+        word.replace("\"", "")
+        word.replace(",", "")
         term_list.append([word.replace(" ", "_").lower(), word])
 
     for term in term_list:
         try:
-            print(f"{term[1]} - {wikipedia.page(term[0]).summary[:500]}\n\n")
+            raw_text = wikipedia.page(term[0]).summary[:500]
+            text = raw_text.split(".")
+            text.remove(text[-1])
+            text.reverse()
+            formatted_text = "".join(text)
+            print(f"{term[1]} - {formatted_text}.")
         except:
-            print(f"ERROR > term \"{term[0]}\" not found. Manual labor time.\n\n")
+            continue
 
     print("Finished!")
