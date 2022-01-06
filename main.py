@@ -11,7 +11,7 @@ with open("terms.txt") as file:
 
     for term in term_list:
         try:
-            raw_text = wikipedia.page(term[0]).summary[:500]
+            raw_text = wikipedia.summary(term[0])[:500]
             text = raw_text.split(".")
             text.remove(text[-1])
             text.reverse()
