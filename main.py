@@ -44,7 +44,6 @@ for term in term_list:
     except wikipedia.exceptions.DisambiguationError:
         if args.interactive:
             output_text += interactive_try_until_found("Too ambiguous.", term[1])
-
     print("Finished!")
 
 with open(args.output, "w") as file:
